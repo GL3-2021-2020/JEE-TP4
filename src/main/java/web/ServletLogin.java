@@ -2,6 +2,7 @@ package web;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,14 @@ public class ServletLogin extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         Utilisateur result = gestionUtilisateur.Chercher(login, password);
-        System.out.println(result.toString());
+
+        if (result != null) {
+            req.setAttribute("data", result);
+            RequestDispatcher rd = req.getRequestDispatcher("Bienvenue.jsp");
+            rd.forward(req, resp);
+        } else {
+            RequestDispatcher rd = req.getRequestDispatcher("error.jsp");
+            rd.forward(req, resp);
+        }
     }
 }

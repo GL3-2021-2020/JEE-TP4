@@ -1,11 +1,11 @@
 package metier;
 
 public class Utilisateur {
-    private Integer idUser;
-    private String login;
-    private String pass;
-    private String email;
-    private String ville;
+    public Integer idUser;
+    public String login;
+    public String pass;
+    public String email;
+    public String ville;
 
     public String getVille() {
         return ville;
