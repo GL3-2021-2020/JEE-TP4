@@ -1,0 +1,21 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "deploy",
+      "type": "shell",
+      "command": "mvn tomcat7:redeploy",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "watch",
+      "type": "shell",
+      "command": "find src/ | entr sh -c 'mvn tomcat7:redeploy'",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}
