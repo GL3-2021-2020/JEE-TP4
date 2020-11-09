@@ -47,6 +47,9 @@ public class ServletAjouter extends HttpServlet {
         String ville = req.getParameter("ville");
         Utilisateur utilisateur = new Utilisateur(0, login, password, email, ville);
         gestionUtilisateur.ajouter(utilisateur);
+
+        Vector<Utilisateur> usersUpdated = gestionUtilisateur.lister();
+        req.setAttribute("users", usersUpdated);
         RequestDispatcher rd = req.getRequestDispatcher("Bienvenue.jsp");
         rd.forward(req, resp);
     }

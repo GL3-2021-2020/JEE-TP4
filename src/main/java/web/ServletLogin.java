@@ -26,7 +26,6 @@ public class ServletLogin extends HttpServlet {
         String password = req.getParameter("password");
         Utilisateur user = gestionUtilisateur.Chercher(login, password);
         Vector<Utilisateur> users = gestionUtilisateur.lister();
-
         req.setAttribute("users", users);
 
         if (!login.equals("") && !password.equals("") && user != null) {
