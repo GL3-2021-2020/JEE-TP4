@@ -33,9 +33,10 @@ public class GestUserDao {
     public void addUser(String l, String p, String e, String v) {
         Connection conn = Utilitaire.getConnection();
         Utilisateur u = null;
+        System.out.println(l);
         try {
             PreparedStatement ps = conn
-                    .prepareStatement("insert into db.Utilisateurs.(LOGIN,PASS,EMAIL,VILLE) values(?,?,?,?)");
+                    .prepareStatement("insert into db.Utilisateurs (LOGIN,PASS,EMAIL,VILLE) values(?,?,?,?)");
             ps.setString(1, l);
             ps.setString(2, p);
             ps.setString(3, e);

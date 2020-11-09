@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.GestionUtilisateur;
 import metier.Utilisateur;
@@ -22,14 +24,20 @@ public class ServletLogin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        Utilisateur result = gestionUtilisateur.Chercher(login, password);
+        Utilisateur user = gestionUtilisateur.Chercher(login, password);
+        Vector<Utilisateur> users = gestionUtilisateur.lister();
 
-        if (result != null) {
-            req.setAttribute("data", result);
+        req.setAttribute("users", users);
+
+        if (!login.equals("") && !password.equals("") && user != null) {
+            req.setAttribute("data", user);
+            HttpSession maSession = req.getSession(true);
+            maSession.setAttribute("user", user);
             RequestDispatcher rd = req.getRequestDispatcher("Bienvenue.jsp");
             rd.forward(req, resp);
         } else {
-            RequestDispatcher rd = req.getRequestDispatcher("error.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("Login.jsp");
+            req.setAttribute("error", "auth error");
             rd.forward(req, resp);
         }
     }

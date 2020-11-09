@@ -20,6 +20,6 @@ public class Utilitaire {
     }
 
     public static void main(String[] args) {
-        Connection c = Utilitaire.getConnection();
+        Utilitaire.getConnection();
     }
 }
